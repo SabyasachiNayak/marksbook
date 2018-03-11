@@ -1,0 +1,10 @@
+com\pr\model\User.class
+com\pr\service\UserServiceImpl.class
+com\pr\controller\LoginController.class
+com\pr\controller\RegisterController.class
+com\pr\dao\UserDAO.class
+com\pr\dao\UserDAOImpl.class
+com\pr\model\Login.class
+com\pr\utility\StatusMessage.class
+com\pr\controller\MarksBookController.class
+com\pr\service\UserService.class
