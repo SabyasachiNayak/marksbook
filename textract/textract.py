@@ -10,6 +10,7 @@ from itertools import chain
 
 #write a for-loop to open many files -- leave a comment if you'd
 #like to learn how
+#filename = raw_input("Enter Filename: ")
 filename = 'example19.pdf' 
 #open allows you to read the file
 pdfFileObj = open(filename,'rb')
