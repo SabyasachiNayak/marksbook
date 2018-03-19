@@ -1,5 +1,11 @@
 package com.marksbook.controller;
 
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +14,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.marksbook.model.HSC;
 import com.marksbook.model.User;
+import com.marksbook.service.HSCService;
 import com.marksbook.service.UserService;
+import com.marksbook.utility.PDFParser;
 
 @Controller
 @RequestMapping("/user")
@@ -18,6 +28,9 @@ public class MarksBookController {
 	   
    @Autowired
    UserService userService;
+   
+   @Autowired
+   HSCService hscService;
 	   
    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
    public String welcome(ModelMap model) {
@@ -48,26 +61,34 @@ public class MarksBookController {
 	   return new ResponseEntity<Integer>(id, HttpStatus.OK);
    }
    
- /*  @RequestMapping(value = "/getEngineer/{id}", method = RequestMethod.GET,produces="application/json")
-   public @ResponseBody Engineer getEngineer(@PathVariable("id") int id)
+   @RequestMapping(value = "/saveHSCMarks", method = RequestMethod.POST,produces="application/json")
+   public String saveHSCMarks(String fileName) throws InvalidPasswordException, IOException
    {
-	   Engineer engineer = engineerService.getEngineerById(id);
-       return engineer;
+	   Map<String,Integer> hscMap = PDFParser.readFromHSCPDF(fileName);
+       Iterator<Map.Entry<String, Integer>> itr = hscMap.entrySet().iterator();
+       while(itr.hasNext())
+       {
+    	    HSC hscMarks = new HSC();
+            Map.Entry<String, Integer> entry = itr.next();
+            hscMarks.setSubject(entry.getKey());
+            hscMarks.setMarks(entry.getValue());
+            if(entry.getKey().contains("FLO") || entry.getKey().contains("SLE") || entry.getKey().contains("TLS"))
+            {
+            	hscMarks.setFullmarks(100);
+            }
+            else
+            {
+            	hscMarks.setFullmarks(75);
+            }
+     	    hscService.saveMarks(hscMarks);
+       }
+       return "marksboard";
    }
    
-   @RequestMapping(value = "/addEngineer", method = RequestMethod.POST,produces="application/json")
-   public ResponseEntity<Engineer> addEngineer(@RequestBody Engineer engineer)
+   @RequestMapping(value = "/getHSCMarks", method = RequestMethod.GET,produces="application/json")
+   public @ResponseBody List<HSC> getHSCMarks() 
    {
-	   int id = userService.getIdByEmail(engineer.getEmailId());
-	   engineer.setId(id);
-	   engineerService.save(engineer);
-	   return new ResponseEntity<Engineer>(engineer, HttpStatus.OK);
+	   List<HSC> hscMarks = hscService.getMarks();
+	   return hscMarks;
    }
-   
-   //Update a Engineer Point by id
-   @RequestMapping(value = "/updateEngineer/{id}", method = RequestMethod.PUT,produces="application/json")
-   public ResponseEntity<?> updatEngineer(@PathVariable("id") int id, @RequestBody Engineer engineer) {
-	  engineerService.update(id, engineer);
-      return new ResponseEntity<Engineer>(engineer, HttpStatus.OK);
-   }  */
 }

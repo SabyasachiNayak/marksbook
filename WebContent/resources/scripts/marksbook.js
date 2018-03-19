@@ -1,27 +1,3 @@
-	/*function openSignup() {
-	   // document.getElementById('registerDiv').style.display='block';
-	    $('#loginDivContent').load("../register/user");
-	};
-	function openSignIn() {
-	    $('#loginDivContent').load("../login/home");
-	};
-	
-	function closeNewUserModal() {
-	 var modal = document.getElementById('registerDiv');
-	 modal.style.display = "none";
-	};
-	
-	function closeUserModal(){
-		 var modal = document.getElementById('userProfileModal');
-	 	    
-	 	    window.onclick = function(event) {
-	 	        if (event.target == modal) {
-	 	            modal.style.display = "none";
-	 	        }
-	 	    };
-	} 
-	*/
-
 	function register() {
 		var formData = {
 	    		name : $("#name").val(),
@@ -36,7 +12,7 @@
 		    url:  '../register/registerUser',
 		    data : JSON.stringify(formData),
 		    dataType: 'json',
-		    success: function(result) {debugger;
+		    success: function(result) {
 		    	 console.log("registration - success");
 		    	 
 		    	 if(result.status == "FAILURE")
@@ -68,7 +44,7 @@
 		var formData = {
 	    		email :  $("#userid").val(),
 	    		password: $("#passwd").val(),
-	    	};debugger;
+	    	};
 	    	
 		if(formData.email != "" && formData.password != "")
 		{
@@ -78,7 +54,7 @@
 		    url:  '../login/validate',
 		    data : JSON.stringify(formData),
 		    dataType: 'json',
-		    success: function(result) {debugger;
+		    success: function(result) {
 			    if(result == '' || result == null)
 		    	{
 		    		document.getElementById('wrongPass').style.display='block';
@@ -98,31 +74,6 @@
 		  });
 		}
 	};
-	
-	/*function welcome()  {
-		 $.ajax({
-		        type: 'GET',
-		        url:  '../user/welcome',
-		        async: true,
-		        success: function(result) {
-		        	window.location.replace("../user/welcome");
-		        	var name = document.getElementById('name').value;
-		        	var email = document.getElementById('mailId').value;
-		        	sessionStorage.setItem('name',name);
-		        	sessionStorage.setItem('email',email);
-		        },
-		        error: function() {
-		            console.log('go to profile error');
-		        }
-		      });
-	}*/
-	
-	function upload()
-	{
-		document.getElementById('10thUpload').style.display='none';
-		document.getElementById('10thDownload').style.display='block';
-		document.getElementById('10thMarksTable').style.display='block';
-	}
 	
 	function signOut()  {
 		sessionStorage.clear();
@@ -161,6 +112,68 @@
 			document.getElementById('getPassword').style.display='none';
 		}
 	};
+	
+	$(document).ready(function(){
+	    var name = sessionStorage.getItem("name");
+	    var fname = name.split(' ').shift();
+	    document.getElementById('userName').style.display='block';
+		document.getElementById('userid').innerHTML= "Welcome " + fname; 
+	});
+	
+	$(document).ready(function() {
+	$("#viewMarksBtn").click(function()
+	{
+		$.ajax({
+		    type: 'GET',
+		    contentType : 'application/json',
+		    url:  '../user/getHSCMarks',
+		    dataType: 'json',
+		    success: function(result) {
+				if(result.length > 0)
+				{
+					document.getElementById('HSCMarksTableDiv').style.display='block';
+					
+					//$('#hscMarksTable tr').not(':first').not(':last').remove();
+					$('#hscMarksTable tr').not(':first').remove();
+		        	var html = '';
+		        	for(var i = 0; i < result.length; i++)
+		        	            html += '<tr><td>' + result[i].subject + '</td><td>' + result[i].fullmarks + '</td><td>'
+		        	            + result[i].marks + '</td></tr>';
+		        	html = html + '<tr><th>Total</th><th>750</th><th>562</th></tr><tr><th>Overall Percentage</th><th>75</th></tr>';
+		        	$('#hscMarksTable tr').first().after(html);
+				}
+		    },
+			error: function() {
+	    	 console.log('show marks error');
+			}
+		});
+	});
+  });
+	
+	function signOut()  {
+		sessionStorage.clear();
+		window.location.replace("../login/home");
+	}
+
+	$(document).ready(function(){
+		$("#passwd").keypress(function(e) {
+			if(e.keyCode == 13) {
+			    signIn();
+			}
+		});
+	});
+	
+	$('#chooseFile').bind('change', function () {
+		  var filename = $("#chooseFile").val();
+		  if (/^\s*$/.test(filename)) {
+		    $(".file-upload").removeClass('active');
+		    $("#noFile").text("No file chosen..."); 
+		  }
+		  else {
+		    $(".file-upload").addClass('active');
+		    $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
+		  }
+		});
 	
 	
 	
