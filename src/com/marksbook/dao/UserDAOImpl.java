@@ -21,9 +21,9 @@ public class UserDAOImpl implements UserDAO {
 	}
        
 	@Override
-    public long register(User engineer) {
-       sessionFactory.getCurrentSession().save(engineer);
-       return engineer.getId();
+    public long register(User user) {
+       sessionFactory.getCurrentSession().save(user);
+       return user.getId();
     }
     
     public boolean isValidUser(Login login) {  	

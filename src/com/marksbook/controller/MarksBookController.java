@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.marksbook.model.File;
 import com.marksbook.model.HSC;
 import com.marksbook.model.User;
+import com.marksbook.service.FileService;
 import com.marksbook.service.HSCService;
 import com.marksbook.service.UserService;
 import com.marksbook.utility.PDFParser;
@@ -31,6 +38,9 @@ public class MarksBookController {
    
    @Autowired
    HSCService hscService;
+   
+   @Autowired
+   FileService fileService;
 	   
    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
    public String welcome(ModelMap model) {
@@ -91,4 +101,17 @@ public class MarksBookController {
 	   List<HSC> hscMarks = hscService.getMarks();
 	   return hscMarks;
    }
+   
+   @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+   public String handleFileUpload(@RequestParam("chooseFile") MultipartFile file) throws Exception {
+         
+	   System.out.println("Saving file: " + file.getOriginalFilename());
+       
+       File uploadFile = new File();
+       uploadFile.setName(file.getOriginalFilename());
+       uploadFile.setData(file.getBytes());
+       fileService.save(uploadFile);   
+ 
+       return "welcome";
+   }  
 }

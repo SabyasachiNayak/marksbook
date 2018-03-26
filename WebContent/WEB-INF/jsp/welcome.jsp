@@ -33,7 +33,7 @@
 </div>  -->
 
 <div id="welcomeDiv">
- <form id="file-form" method="post" action="${pageContext.request.contextPath}/user/saveHSCMarks">
+ <form id="file-form" method="post" action="${pageContext.request.contextPath}/user/uploadFile" enctype="multipart/form-data">
   <div id="upload" class="onerow" style="padding-left: 35%;">
 	<label style="font-size:20px;">Please upload your marsksheet in PDF format.</label> 
 	<br/><br/>
@@ -54,7 +54,7 @@
   <br/>
   <div id="allMarksheet" class="onerow" style="margin-left: 45%;border: 1px solid;width:8em;height:5.5em;background-color:#21a69d;"> 
 	  <input type="checkbox" name="vehicle" value="HSC" checked>HSC<br>
-	  <input type="checkbox" name="vehicle" value="Intermediate" checked>Intermediate<br>
+	  <input type="checkbox" name="vehicle" value="Intermediate">Intermediate<br>
 	  <input type="checkbox" name="vehicle" value="Graduation">Graduation<br>
 	  <input type="checkbox" name="vehicle" value="Masters">Masters<br>
   </div>
@@ -64,6 +64,27 @@
   </div>
  </div> 
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+    var name = sessionStorage.getItem("name");
+    var fname = name.split(' ').shift();
+    document.getElementById('userName').style.display='block';
+	document.getElementById('userid').innerHTML= "Welcome " + fname; 
+});
+
+$('#chooseFile').bind('change', function () {
+	  var filename = $("#chooseFile").val();debugger;
+	  if (/^\s*$/.test(filename)) {
+	    $(".file-upload").removeClass('active');
+	    $("#noFile").text("No file chosen..."); 
+	  }
+	  else {
+	    $(".file-upload").addClass('active');
+	    $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
+	  }
+	});
+
+</script>
 </html>
 
 

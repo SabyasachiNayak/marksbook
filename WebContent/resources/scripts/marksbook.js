@@ -74,11 +74,6 @@
 		  });
 		}
 	};
-	
-	function signOut()  {
-		sessionStorage.clear();
-		window.location.replace("../login/home");
-	}
 
 	$(document).ready(function(){
 		$("#passwd").keypress(function(e) {
@@ -113,13 +108,6 @@
 		}
 	};
 	
-	$(document).ready(function(){
-	    var name = sessionStorage.getItem("name");
-	    var fname = name.split(' ').shift();
-	    document.getElementById('userName').style.display='block';
-		document.getElementById('userid').innerHTML= "Welcome " + fname; 
-	});
-	
 	$(document).ready(function() {
 	$("#viewMarksBtn").click(function()
 	{
@@ -137,7 +125,7 @@
 					$('#hscMarksTable tr').not(':first').remove();
 		        	var html = '';
 		        	for(var i = 0; i < result.length; i++)
-		        	            html += '<tr><td>' + result[i].subject + '</td><td>' + result[i].fullmarks + '</td><td>'
+		        	            html += '<tr><td><a href="#" onclick="loadQuestion()">' + result[i].subject + '</a></td><td>' + result[i].fullmarks + '</td><td>'
 		        	            + result[i].marks + '</td></tr>';
 		        	html = html + '<tr><th>Total</th><th>750</th><th>562</th></tr><tr><th>Overall Percentage</th><th>75</th></tr>';
 		        	$('#hscMarksTable tr').first().after(html);
@@ -149,6 +137,20 @@
 		});
 	});
   });
+	
+	function loadQuestion()
+	{
+		document.getElementById('questionDiv').style.display='block';
+		document.getElementById('HSCMarksTableDiv').style.display='none';
+		document.getElementById('header').style.display='none';
+	}
+	
+	function backToMarksboard()
+	{
+		document.getElementById('questionDiv').style.display='none';
+		document.getElementById('header').style.display='block';
+		document.getElementById('HSCMarksTableDiv').style.display='block';
+	}
 	
 	function signOut()  {
 		sessionStorage.clear();
@@ -163,17 +165,6 @@
 		});
 	});
 	
-	$('#chooseFile').bind('change', function () {
-		  var filename = $("#chooseFile").val();
-		  if (/^\s*$/.test(filename)) {
-		    $(".file-upload").removeClass('active');
-		    $("#noFile").text("No file chosen..."); 
-		  }
-		  else {
-		    $(".file-upload").addClass('active');
-		    $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
-		  }
-		});
 	
 	
 	

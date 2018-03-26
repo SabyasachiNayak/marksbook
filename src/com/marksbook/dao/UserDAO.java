@@ -5,7 +5,7 @@ import com.marksbook.model.User;
 
 public interface UserDAO
 {   
-    long register(User engineer);
+    long register(User user);
     boolean isValidUser(Login login);
     boolean emailExist(String email);
     int getIdByEmail(String email);
