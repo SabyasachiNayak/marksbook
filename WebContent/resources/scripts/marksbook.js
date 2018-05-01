@@ -120,14 +120,53 @@
 				if(result.length > 0)
 				{
 					document.getElementById('HSCMarksTableDiv').style.display='block';
+					document.getElementById('12thMarksTableDiv').style.display='block';
 					
 					//$('#hscMarksTable tr').not(':first').not(':last').remove();
 					$('#hscMarksTable tr').not(':first').remove();
 		        	var html = '';
-		        	for(var i = 0; i < result.length; i++)
+		        	/*for(var i = 0; i < result.length; i++)
 		        	            html += '<tr><td><a href="#" onclick="loadQuestion()">' + result[i].subject + '</a></td><td>' + result[i].fullmarks + '</td><td>'
-		        	            + result[i].marks + '</td></tr>';
-		        	html = html + '<tr><th>Total</th><th>750</th><th>562</th></tr><tr><th>Overall Percentage</th><th>75</th></tr>';
+		        	            + result[i].marks + '</td></tr>';*/
+		        	
+		        	for(var i = 0; i < result.length; i++)
+        	            html += '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'ORIYA(FLO)' + '</a></td><td>' 
+        	            	+ result[i].oriyaFM + '</td><td>'
+        	            	+ result[i].oriya + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'ENGLISH(SLE)' + '</a></td><td>' 
+        	            	+ result[i].englishFM + '</td><td>'
+        	            	+ result[i].english + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'SANSKRIT(TLS)' + '</a></td><td>' 
+        	            	+ result[i].sanskritFM + '</td><td>'
+        	            	+ result[i].sanskrit + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'MATH PAP-1(MTA)' + '</a></td><td>' 
+        	            	+ result[i].math1FM + '</td><td>'
+        	            	+ result[i].math1 + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'MATH PAP-2(MTG)' + '</a></td><td>' 
+        	            	+ result[i].math2FM + '</td><td>'
+        	            	+ result[i].math2 + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'SCIENCE PAP-1(SCP)' + '</a></td><td>' 
+        	            	+ result[i].science1FM + '</td><td>'
+        	            	+ result[i].science1 + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'SCIENCE PAP-2(SCL)' + '</a></td><td>' 
+        	            	+ result[i].science2FM + '</td><td>'
+        	            	+ result[i].science2 + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'HISTORY(SSH)' + '</a></td><td>' 
+        	            	+ result[i].historyFM + '</td><td>'
+        	            	+ result[i].history + '</td></tr>'
+        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ 'GEOGRAPHY(SSG)' + '</a></td><td>' 
+        	            	+ result[i].geographyFM + '</td><td>'
+        	            	+ result[i].geography + '</td></tr>';
+		        	html = html + '<tr><th>Total</th><th>750</th><th>562</th></tr><tr><th>Overall Percentage</th><th>75</th><th>Very Good</th></tr>';
 		        	$('#hscMarksTable tr').first().after(html);
 				}
 		    },

@@ -5,4 +5,5 @@ import com.marksbook.model.File;
 public interface FileService
 {
 	void save(File file);
+	File getFile(String fileName);
 }

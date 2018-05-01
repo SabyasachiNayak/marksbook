@@ -42,9 +42,10 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
  	<bean id="dataSource"  
 	  class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-	  <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />  
+	 <!--  <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />  --> 
+	  <property name="url" value="jdbc:mysql://aa1mh9ovobatiy5.cdjndxxlmv3b.us-east-1.rds.amazonaws.com:3306/ebdb" />
 	  <property name="username" value="root" />  
-	  <property name="password" value="root" /> 
+	  <property name="password" value="password" /> 
 	 </bean>
  
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

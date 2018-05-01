@@ -10,7 +10,7 @@
 <body style="white-space:nowrap;">
 <div class="header" style="background-color: #426f52;width:83em">
    <h1 align="center" style="color:whitesmoke;">
-  	<a id="userid" ref="#" style="font-size:20px;color:whitesmoke;margin-right:20em"></a>
+  	<a id="userid" ref="#" style="font-size:20px;color:whitesmoke;margin-right:15em"></a>
     <a style="color:whitesmoke;margin-right:9em">MarksBook</a>
     <a href="../user/welcome" style="font-size:20px;color:whitesmoke;padding-right: 1%">Home</a>
   	<a href="../user/marksboard" style="font-size:20px;color:whitesmoke;padding-right: 1%">MarksBoard</a>
@@ -33,8 +33,10 @@
 <div id="userName" style="font-weight:bold;font-size:20px;color:black;display: none"></div>
   <div id="header" style="margin-left:25%;margin-top:2em">
   <span>
-  	<input id="viewMarksBtn" type="button" class="button" style="font-size:15px;height:2.5em;width:26em;background-color:#e47911;border:1px solid;"value="View your marks" >
- 	<a href="../user/welcome" style="font-size:20px;margin-left:5em">Add more marksheets</a>
+  	<!-- <input id="viewMarksBtn" type="button" class="button" style="font-size:15px;height:2.5em;width:26em;background-color:#e47911;border:1px solid;"value="Show marks" > -->
+  	
+  	<a id="viewMarksBtn" href="#" style="font-size:22px;margin-left:10em;color:blue;">Show marks</a>
+ 	<a href="../user/welcome" style="font-size:22px;margin-left:5em;color:blue;">Add marksheets</a>
   </span>
   </div>
   <br/>
@@ -54,7 +56,7 @@
   
   <br/>
   
-  <div id="12thMarksTable" class="onerow" style="width:70%;padding-left:15%;display: none">
+  <div id="12thMarksTableDiv" style="width:70%;margin-left:15%;display: none">
 	  <label style="font-size:25px">+2 Marks</label>
 	  <br/>
 	  <table id="iscTable" class="accordion">
@@ -146,6 +148,7 @@
 	  <tr>
 	    <th>Overall Percentage</th>
 	    <th>67</th> 
+	    <th>Very Good</th>
 	  </tr>
 	 </table>
 	 <div id="12thDownload" class="onerow">
@@ -158,7 +161,7 @@ $(document).ready(function(){
     var name = sessionStorage.getItem("name");
     var fname = name.split(' ').shift();
     document.getElementById('userName').style.display='block';
-	document.getElementById('userid').innerHTML= "Welcome " + fname; 
+	document.getElementById('userid').innerHTML= "Welcome " + name; 
 });
 </script>
 </html>

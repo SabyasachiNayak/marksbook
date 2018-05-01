@@ -5,4 +5,5 @@ import com.marksbook.model.File;
 public interface FileDAO
 {   
 	void save(File file);
+	File getFile(String fileName);
 }

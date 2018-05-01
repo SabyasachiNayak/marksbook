@@ -1,6 +1,7 @@
 package com.marksbook.utility;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,6 @@ public class PDFParser {
 	
 	public static Map<String,Integer> readFromHSCPDF(String fileName) throws InvalidPasswordException, IOException
 	{
-		fileName = "C:\\Bunty\\Marksheet_HSC.pdf";
 		File file = new File(fileName);
 		PDDocument document = PDDocument.load(file);
 		PDFTextStripper s = new PDFTextStripper();
@@ -34,7 +34,19 @@ public class PDFParser {
 		marks.put("SANSKRIT(TLS)", Integer.parseInt(subMarks[5]));
 		marks.put("MATH PAP-1(MTA)", Integer.parseInt(subMarks[8]) - Integer.parseInt(subMarks[7]));
 		marks.put("MATH PAP-2(MTG)", Integer.parseInt(subMarks[7]));
-		marks.put("SCIENCE PAP-1(SCP)", Integer.parseInt(subMarks[11]) - Integer.parseInt(subMarks[10]));
+		
+		//fix for pdf parsing issue in unix
+		String OS = System.getProperty("os.name").toLowerCase();
+	      
+        if(OS.indexOf("win") >= 0)
+        {
+    	   marks.put("SCIENCE PAP-1(SCP)", Integer.parseInt(subMarks[11]) - Integer.parseInt(subMarks[10]));
+        }
+        else
+        {
+    	   marks.put("SCIENCE PAP-1(SCP)", Integer.parseInt("99") - Integer.parseInt(subMarks[10]));
+        }
+		
 		marks.put("SCIENCE PAP-2(SCL)", Integer.parseInt(subMarks[10]));
 		marks.put("HISTORY(SSH)", Integer.parseInt(subStrMarks[1]));
 		marks.put("GEOGRAPHY(SSG)", Integer.parseInt(subStrMarks[3]) - Integer.parseInt(subStrMarks[1]));

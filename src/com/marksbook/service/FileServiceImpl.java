@@ -18,4 +18,10 @@ public class FileServiceImpl implements FileService {
     public void save(File file) {
        fileDAO.save(file);
     }
+ 	
+ 	@Transactional
+    @Override
+    public File getFile(String fileName) {
+       return fileDAO.getFile(fileName);
+    }
 }

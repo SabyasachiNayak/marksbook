@@ -8,9 +8,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
                     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-   <context:component-scan base-package="com.pr.controller" />
-   <context:component-scan base-package="com.pr.service" />
-   <context:component-scan base-package="com.pr.dao" />
+   <context:component-scan base-package="com.marksbook.controller" />
+   <context:component-scan base-package="com.marksbook.service" />
+   <context:component-scan base-package="com.marksbook.dao" />
    <context:annotation-config />
    <mvc:annotation-driven />
    <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -30,18 +30,28 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
     <bean id="persistenceExceptionTranslationPostProcessor"  
   		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />  
     
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+         
+        <!-- max size of file in memory (in bytes) -->
+        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </bean>
+    
  	<bean id="dataSource"  
 	  class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-	  <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />  
+	 <!--  <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />  --> 
+	  <property name="url" value="jdbc:mysql://aa1mh9ovobatiy5.cdjndxxlmv3b.us-east-1.rds.amazonaws.com:3306/ebdb" />
 	  <property name="username" value="root" />  
-	  <property name="password" value="root" /> 
+	  <property name="password" value="password" /> 
 	 </bean>
  
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--scan all class entity to mapping-->
-        <property name="packagesToScan" value="com.pr.model" />
+        <property name="packagesToScan" value="com.marksbook.model" />
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
