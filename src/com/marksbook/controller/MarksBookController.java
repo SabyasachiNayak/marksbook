@@ -47,6 +47,21 @@ public class MarksBookController {
 	      return "welcome";
    }
    
+   @RequestMapping(value = "/home", method = RequestMethod.GET)
+   public String home(ModelMap model) {
+	      return "home";
+   }
+   
+   @RequestMapping(value = "/profile", method = RequestMethod.GET)
+   public String getProfile(ModelMap model) {
+	      return "profile";
+   }
+   
+   @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+   public String getDashboard(ModelMap model) {
+	      return "dashboard";
+   }
+   
    @RequestMapping(value = "/marksboard", method = RequestMethod.GET)
    public String rankingDashboard(ModelMap model) {
 	      return "marksboard";

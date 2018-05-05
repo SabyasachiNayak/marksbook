@@ -39,7 +39,7 @@
 		 }
 		
 	};
-//var emailReg = /^([w-.]+@([w-]+.)+[w-]{2,4})?$/;
+
 	function signIn() {
 		var formData = {
 	    		email :  $("#userid").val(),
@@ -65,7 +65,7 @@
 		    		sessionStorage.setItem("id", result.id);
 		    		sessionStorage.setItem("name", result.name);
 		    		sessionStorage.setItem('email',result.email);
-		    		window.location.replace("../user/welcome");
+		    		window.location.replace("../user/home");
 		    	}
 		    },
 		    error: function() {
@@ -130,39 +130,39 @@
 		        	            + result[i].marks + '</td></tr>';*/
 		        	
 		        	for(var i = 0; i < result.length; i++)
-        	            html += '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            html += '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'ORIYA(FLO)' + '</a></td><td>' 
         	            	+ result[i].oriyaFM + '</td><td>'
         	            	+ result[i].oriya + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'ENGLISH(SLE)' + '</a></td><td>' 
         	            	+ result[i].englishFM + '</td><td>'
         	            	+ result[i].english + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'SANSKRIT(TLS)' + '</a></td><td>' 
         	            	+ result[i].sanskritFM + '</td><td>'
         	            	+ result[i].sanskrit + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'MATH PAP-1(MTA)' + '</a></td><td>' 
         	            	+ result[i].math1FM + '</td><td>'
         	            	+ result[i].math1 + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'MATH PAP-2(MTG)' + '</a></td><td>' 
         	            	+ result[i].math2FM + '</td><td>'
         	            	+ result[i].math2 + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'SCIENCE PAP-1(SCP)' + '</a></td><td>' 
         	            	+ result[i].science1FM + '</td><td>'
         	            	+ result[i].science1 + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'SCIENCE PAP-2(SCL)' + '</a></td><td>' 
         	            	+ result[i].science2FM + '</td><td>'
         	            	+ result[i].science2 + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'HISTORY(SSH)' + '</a></td><td>' 
         	            	+ result[i].historyFM + '</td><td>'
         	            	+ result[i].history + '</td></tr>'
-        	            	+ '<tr><td><a href="#" onclick="loadQuestion()">' 
+        	            	+ '<tr><td><a href="#" style="color:blue;" onclick="loadQuestion()">' 
         	            	+ 'GEOGRAPHY(SSG)' + '</a></td><td>' 
         	            	+ result[i].geographyFM + '</td><td>'
         	            	+ result[i].geography + '</td></tr>';

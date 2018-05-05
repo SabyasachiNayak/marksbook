@@ -42,8 +42,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
  	<bean id="dataSource"  
 	  class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-	 <!--  <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />  --> 
-	  <property name="url" value="jdbc:mysql://aa1mh9ovobatiy5.cdjndxxlmv3b.us-east-1.rds.amazonaws.com:3306/ebdb" />
+	  <!-- <property name="url" value="jdbc:mysql://localhost:3306/marksbook_db" />   -->
+	  <property name="url" value="jdbc:mysql://aa1s5ind8r3f684.cxgskldumac2.us-west-2.rds.amazonaws.com:3306/ebdb" />
 	  <property name="username" value="root" />  
 	  <property name="password" value="password" /> 
 	 </bean>
@@ -56,7 +56,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-               <!--  <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.default_schema"></prop>
                 <prop key="hibernate.format_sql">true</prop>
             </props>
